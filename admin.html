@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>管理后台 - 商品配置</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 登录验证：检查 sessionStorage -->
+  <script>
+  //  if (!sessionStorage.getItem("adminAuth")) {
+      // 没有登录标识则重定向到登录页面
+  //    window.location.href = "login.html";
+  //  }
+  </script>
+</head>
+<body>
+  <div class="admin-container" id="adminContainer">
+    <h1>管理后台</h1>
+    <div class="admin-login-info">
+      <span id="currentUser">当前用户：admin</span>
+      <button onclick="openChangePassword()">修改密码</button>
+      <!-- 修改密码弹窗 -->
+      <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+          <h3>修改密码</h3>
+          <input type="password" id="oldPassword" placeholder="旧密码" /><br/><br/>
+          <input type="password" id="newPassword" placeholder="新密码" /><br/><br/>
+          <button onclick="changePassword()">提交</button>
+          <button onclick="closeChangePassword()">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 添加分类 -->
+    <section class="admin-section">
+      <h2>添加分类</h2>
+      <form id="categoryForm">
+        <label for="categoryName">分类名称：</label>
+        <input type="text" id="categoryName" required />
+        <button type="submit" class="btn btn-primary">添加分类</button>
+      </form>
+      <div id="categoryListAdmin"></div>
+    </section>
+
+    <!-- 添加产品 -->
+    <section class="admin-section">
+      <h2>添加产品</h2>
+      <form id="productForm">
+        <label for="productName">商品名称：</label>
+        <input type="text" id="productName" required /><br/><br/>
+        
+        <label for="productCategory">所属分类：</label>
+        <select id="productCategory"></select><br/><br/>
+        
+        <label for="productPrice">基础价格：</label>
+        <input type="number" step="0.01" id="productPrice" required /><br/><br/>
+        
+        <label for="productImage">图片路径：</label>
+        <input type="text" id="productImage" placeholder="images/product1.jpg" /><br/><br/>
+        
+        <label for="productTags">副标签（逗号分隔）：</label>
+        <input type="text" id="productTags" placeholder="新品,人气" /><br/><br/>
+        
+        <fieldset>
+          <legend>杯型选项（JSON）</legend>
+          <textarea id="cupSizesInput" rows="3" placeholder='[{"label":"大杯","price":0},{"label":"中杯","price":-2}]'></textarea>
+        </fieldset>
+        <br/>
+        
+        <fieldset>
+          <legend>温度选项（JSON）</legend>
+          <textarea id="tempInput" rows="3" placeholder='[{"label":"正常冰","price":0},{"label":"热","price":1}]'></textarea>
+        </fieldset>
+        <br/>
+        
+        <fieldset>
+          <legend>甜度选项（JSON）</legend>
+          <textarea id="sugarInput" rows="3" placeholder='[{"label":"正常甜","price":0},{"label":"少糖","price":0}]'></textarea>
+        </fieldset>
+        <br/>
+        
+        <fieldset>
+          <legend>配料选项（JSON）</legend>
+          <textarea id="toppingsInput" rows="3" placeholder='[{"label":"珍珠","price":2},{"label":"椰果","price":2}]'></textarea>
+        </fieldset>
+        <br/>
+        <button type="submit" class="btn btn-primary">添加产品</button>
+      </form>
+      <div id="productListAdmin"></div>
+    </section>
+
+    <!-- 添加 Banner 配置 -->
+    <section class="admin-section">
+      <h2>Banner 配置</h2>
+      <form id="bannerForm">
+        <label for="bannerUrl">Banner 图片路径：</label>
+        <input type="text" id="bannerUrl" placeholder="images/banner1.jpg" required />
+        <button type="submit" class="btn btn-primary">添加 Banner</button>
+      </form>
+      <div id="bannerListAdmin"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

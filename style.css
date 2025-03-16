@@ -1,0 +1,881 @@
+/* ======= 全局样式 ======= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ======= 顶部搜索栏 ======= */
+.header {
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+}
+.search-bar {
+  width: 80%;
+  max-width: 500px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* ======= Banner 区域 ======= */
+/* Banner 容器 */
+.banner-swiper-container {
+  background: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 横向滚动容器 */
+.banner-swiper {
+  white-space: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+.banner-swiper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 幻灯片 */
+.banner-slide {
+  display: inline-block;
+  width: calc(100% / 2.2); /* 约2.2张图片可见 */
+  scroll-snap-align: start;
+  margin-right: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ======= 内容区域：分类 + 产品 ======= */
+.container,
+.content-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+}
+.content-container {
+  display: flex;
+  flex-direction: row;
+}
+.sidebar {
+  width: 30%;
+  border-right: 1px solid #eee;
+}
+.category-list {
+  list-style: none;
+  padding: 0;
+}
+.category-item {
+  padding: 10px;
+  text-align: center;
+  background: #eee;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.category-item.active {
+  background: #fff;
+  font-weight: bold;
+}
+.main {
+  width: 70%;
+  padding: 10px;
+}
+.category-title {
+  margin: 15px 0 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  border-left: 4px solid #FF7F00; /* 橙色标识 */
+  padding-left: 6px;
+}
+
+/* ======= 产品卡片 ======= */
+.product-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: #fff;
+}
+.product-card:hover {
+  background: #fafafa;
+}
+.product-image {
+  width: 180px;
+  height: 130px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+.product-tags {
+  margin-bottom: 4px;
+}
+.product-tags span {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 4px;
+  font-size: 12px;
+}
+.product-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+.product-price {
+  font-size: 14px;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.spec-btn {
+  align-self: flex-end;
+  background: #FF7F00;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 9999px; /* 圆滑胶囊 */
+  font-size: 14px;
+  cursor: pointer;
+}
+.spec-btn:hover {
+  opacity: 0.9;
+}
+
+/* ======= 弹窗 (选规格) ======= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;  /* 限制弹窗高度 */
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+/* 滚动区域 */
+.modal-body.scrollable {
+  flex: 1;               /* 占满剩余空间 */
+  overflow-y: auto;      /* 超出时滚动 */
+  padding: 10px;
+}
+/* 固定底部区域 */
+.modal-footer.fixed-footer {
+  background: #f7f7f7;
+  padding: 10px 0;
+  /* 这里不设 flex:1; 让其保持固定高度 */
+  border-top: 1px solid #eee;
+}
+.modal-header {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.modal-body {
+  padding: 10px 12px;
+}
+.detail-name {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.detail-tags {
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px;
+}
+.detail-tags .tag {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 4px;
+  font-size: 12px;
+}
+.detail-desc {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  padding: 4px;
+}
+
+/* 分割线 */
+.divider {
+  margin-top: 12px;
+  border-top: 1px solid #666;  /* 黑色分割线 */
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ===== 规格选项 ===== */
+.flavor-group {
+  margin-bottom: 12px;
+}
+.flavor-group h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.option {
+  position: relative;
+  background: #eaeaea;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+.option:hover {
+  opacity: 0.9;
+}
+.option.active
+{
+  background: #FF7F00;
+  color: #fff;
+  border: 1px solid #FF7F00;
+}
+
+/* 推荐标签：位于右上角的小标签 */
+.option-label {
+  position: absolute;
+  top: -8px;
+  left: -13px;
+  background: #FF7F00; /* 橘红色 */
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 8px;
+}
+
+/* ===== 配料选项 ===== */
+#toppingOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.topping-row {
+  display: flex;
+  align-items: center;
+  background: #eaeaea;
+  padding: 4px 6px;
+  position: relative;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+/* 配料项被选中时，背景变为橘色 */
+.topping-row.active {
+  border: 2px solid #FF7F00;  /* 橘色边框 */
+}
+
+/* 右上角数量标签 */
+.topping-qty-tag {
+  position: absolute;
+  top: -8px;
+  right: -13px;
+  background: #FF7F00;  /* 橘色背景 */
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  display: none;
+}
+
+.topping-label {
+  flex: 1;
+  font-size: 13px;
+  color: #333;
+}
+.topping-price {
+  font-size: 12px;
+  color: #FF7F00;
+  margin-right: 6px;
+}
+.topping-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 9999px;
+  background: #ccc;
+  color: #000;
+  font-size: 16px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.topping-qty {
+  width: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ===== 购买数量 ===== */
+.quantity-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.quantity-btn {
+  width: 30px;
+  height: 30px;
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+.quantity-num {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ===== 弹窗底部 ===== */
+/* 金额文字样式 */
+.detail-price {
+  color: #FF7F00; /* 橙色文字 */
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px; /* 增加顶部间距 */
+  padding-left: 10px;
+}
+
+/* 小字说明（已选配料） */
+.selected-info {
+  background-color: #f0f0f0; /* 灰底 */
+  color: #333; /* 黑字 */
+  padding: 5px 0;
+  font-size: 14px;
+  margin-bottom: 15px; /* 给下方内容留出空间 */
+  padding-left: 10px;
+}
+/* 小字说明（已选配料） */
+.selected-info2 {
+  background-color: #ffffff;
+  color: #333; /* 黑字 */
+  padding: 5px 0;
+  font-size: 14px;
+  margin-bottom: 15px; /* 给下方内容留出空间 */
+}
+
+/* 购买数量和金额一行 */
+.price-and-quantity {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 为金额和数量之间增加间距 */
+  margin-bottom: 10px; /* 为下方内容（按钮）增加间距 */
+}
+
+/* 购买数量按钮样式 */
+.quantity-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding-right: 10px;
+}
+
+.quantity-btn {
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 50%; /* 圆形按钮 */
+  cursor: pointer;
+  display: flex; /* 使内容居中 */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 减号：白底，橙色文字 */
+.quantity-btn:first-child {
+  background-color: #ffffff;
+  color: #FF7F00;
+  border: 2px solid #FF7F00;
+}
+
+/* 加号：红底，白色文字 */
+.quantity-btn:last-child {
+  background-color: #E74C3C;
+  color: white;
+  border: 2px solid #E74C3C;
+}
+
+/* 立即购买按钮 */
+.btn-buy {
+  border: 2px solid #FF7F00; /* 橙色边框 */
+  background-color: white; /* 白底 */
+  color: #FF7F00; /* 橙色文字 */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px; /* 胶囊型 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px; /* 按钮与上方内容有更多间隙 */
+}
+
+.btn-buy:hover {
+  background-color: #FF7F00; /* 橙色背景 */
+  color: white; /* 白色文字 */
+}
+
+/* 添加至购物车按钮 */
+.btn-add-cart {
+  background-color: #E74C3C; /* 红底 */
+  color: white; /* 白色文字 */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px; /* 胶囊型 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px; /* 增加按钮的间距 */
+}
+
+.btn-add-cart:hover {
+  background-color: #D44B3A; /* 红色背景变化 */
+}
+
+/* 按钮容器 */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* 按钮之间的间距 */
+  justify-content: center; /* 按钮居中 */
+}
+
+
+
+/* ===== 底部购物车与结算栏 ===== */
+/* ===== 底部购物栏（胶囊形浮窗） ===== */
+.bottom-cart-bar {
+  position: fixed;
+  bottom: 50px;                /* 离底部留50px空隙 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;       /* 胶囊形 */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 9999;               /* 确保置顶 */
+}
+
+/* 左侧：白色背景 */
+.cart-left {
+  flex: 1;
+  background: #fff;            /* 左侧白色 */
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+/* 购物车图标区域 */
+.cart-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border-radius: 9999px;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  line-height: 28px;
+  border: 1px solid #ddd;      /* 细边框，可选 */
+}
+
+/* 购物车数量（右上角小圆点） */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #E74C3C;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+}
+
+/* 显示价格 */
+.cart-price {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 右侧：橘色背景，点击去结算 */
+.cart-right {
+  background: #FF7F00;         /* 右侧橘色 */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;         /* 避免自动换行 */
+}
+.cart-right:hover {
+  opacity: 0.9;
+}
+
+.btn-checkout {
+  background: #FF7F00;
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ===== 结算浮窗 ===== */
+/* 结算浮窗容器 */
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;  /* 限制弹窗高度 */
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+/* 滚动的订单详情区域 */
+.checkout-details.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* 固定底部按钮区域 */
+.checkout-footer {
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  background: #f7f7f7;
+  text-align: center;
+}
+
+/* 标题 */
+.checkout-details h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* 商品详情部分 */
+.checkout-details p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* 按钮容器 */
+.checkout-button {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* 备注栏 */
+.checkout-remark {
+  margin-top: 12px;
+  width: 100%;
+}
+.checkout-remark label {
+  font-size: 14px;
+  color: #333;
+}
+.checkout-remark textarea {
+  width: 100%;
+  height: 60px;
+  font-size: 14px;
+  margin-top: 4px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+/* 取餐方式按钮 */
+.pickup-type {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+}
+.pickup-btn {
+  flex: 1;
+  background: #eee;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.pickup-btn.active {
+  background: #FF7F00;
+  color: #fff;
+}
+
+/* 时间段选择区域 */
+/* 时间类别标签 */
+.time-category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.time-category-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #eee;
+  font-size: 14px;
+  cursor: pointer;
+}
+.time-category-btn.active {
+  background-color: #FF7F00;
+  color: #fff;
+}
+
+/* 时间段按钮 */
+.time-slot-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.time-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.time-btn:hover {
+  background: #ddd;
+}
+.time-btn.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.time-btn.active {
+  background: #FF7F00;
+  color: #fff;
+}
+
+
+/* 结算按钮 */
+.btn-checkout {
+  background: linear-gradient(90deg, #ff7f00, #ff6a00);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background: linear-gradient(90deg, #ff6a00, #ff7f00);
+  transform: scale(1.05);
+}
+
+/* 关闭按钮 */
+.btn-close {
+  background: #ccc;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  background: #bbb;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 结算浮窗定位：中下方，距离底部50px */
+.modal#checkoutModal {
+  position: fixed;
+  left: 50%;
+  bottom: 50px; /* 距离底部50px */
+  transform: translateX(-50%);
+  display: none;
+  z-index: 10000;
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal#checkoutModal.active {
+  display: block;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ===== 管理后台 ===== */
+.admin-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+.admin-section {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+.admin-section h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+.admin-section form label {
+  display: inline-block;
+  width: 120px;
+  font-size: 14px;
+  color: #333;
+}
+.admin-section form input,
+.admin-section form select,
+.admin-section form textarea {
+  font-size: 14px;
+  padding: 4px;
+  width: 200px;
+  margin-bottom: 4px;
+}
+.admin-section fieldset {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 4px;
+}
+#categoryListAdmin,
+#productListAdmin {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}

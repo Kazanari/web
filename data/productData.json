@@ -1,0 +1,123 @@
+{
+    "products": [
+      {
+        "id": 101,
+        "categoryId": 1,
+        "name": "橙心橙意",
+        "price": 12.0,
+        "tags": ["新品", "人气"],
+        "image": "images/橙心橙意.png",
+        "desc": "新鲜橙子与茶完美融合，口感清新。",
+        "options": {
+          "cupSizes": [
+            { "label": "大杯", "price": 0 },
+            { "label": "中杯", "price": -2 }
+          ],
+          "temperature": [
+            { "label": "正常冰", "price": 0 },
+            { "label": "少冰", "price": 0 },
+            { "label": "热", "price": 1 }
+          ],
+          "sugar": [
+            { "label": "正常甜", "price": 0 },
+            { "label": "少糖", "price": 0 },
+            { "label": "无糖", "price": 0 }
+          ],
+          "toppings": [
+            { "label": "珍珠", "price": 2 },
+            { "label": "椰果", "price": 2 },
+            { "label": "芦荟", "price": 3 }
+          ]
+        }
+      },
+      {
+        "id": 102,
+        "categoryId": 1,
+        "name": "小芒运果茶",
+        "price": 11.44,
+        "tags": ["热销"],
+        "image": "images/榴恋小臭臭.png",
+        "desc": "清甜芒果搭配特选茶底，回味悠长。",
+        "options": {
+          "cupSizes": [
+            { "label": "大杯", "price": 0 },
+            { "label": "中杯", "price": -1 }
+          ],
+          "temperature": [
+            { "label": "正常冰", "price": 0 },
+            { "label": "去冰", "price": 0 }
+          ],
+          "sugar": [
+            { "label": "正常甜", "price": 0 },
+            { "label": "少糖", "price": 0 }
+          ],
+          "toppings": [
+            { "label": "珍珠", "price": 2 },
+            { "label": "椰果", "price": 2 }
+          ]
+        }
+      },
+      {
+        "id": 201,
+        "categoryId": 2,
+        "name": "经典奶茶",
+        "price": 8.5,
+        "tags": ["经典"],
+        "image": "images/椰乳芋芒芒.jpg",
+        "desc": "浓郁奶香与茶香完美结合。",
+        "options": {
+          "cupSizes": [
+            { "label": "大杯", "price": 0 },
+            { "label": "中杯", "price": -1 }
+          ],
+          "temperature": [
+            { "label": "热", "price": 0 },
+            { "label": "少冰", "price": 0 }
+          ],
+          "sugar": [
+            { "label": "正常甜", "price": 0 },
+            { "label": "少糖", "price": 0 },
+            { "label": "无糖", "price": 0 }
+          ],
+          "toppings": [
+            { "label": "珍珠", "price": 2 },
+            { "label": "布丁", "price": 3 }
+          ]
+        }
+      },
+      {
+        "id": 301,
+        "categoryId": 3,
+        "name": "焦糖玛奇朵",
+        "price": 16,
+        "tags": ["咖啡", "甜"],
+        "image": "images/怦然小苹果.jpg",
+        "desc": "焦糖风味浓郁，咖啡香气扑鼻。",
+        "options": {
+          "cupSizes": [
+            { "label": "大杯", "price": 0 },
+            { "label": "中杯", "price": -2 }
+          ],
+          "temperature": [
+            { "label": "热", "price": 0 },
+            { "label": "少冰", "price": 0 }
+          ],
+          "sugar": [
+            { "label": "正常甜", "price": 0 },
+            { "label": "少糖", "price": 0 }
+          ],
+          "toppings": [
+            { "label": "奶盖", "price": 3 },
+            { "label": "可可粉", "price": 2 }
+          ]
+        }
+      }
+    
+    ],
+    "categories": [
+      { "id": 1, "name": "鲜果茶" },
+      { "id": 2, "name": "奶茶" },
+      { "id": 3, "name": "特调咖啡" }
+    ]
+  }
+  

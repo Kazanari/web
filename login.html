@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>后台登录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <style>
+    .login-container { max-width: 400px; margin: 100px auto; padding: 20px; background: #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.1); border-radius: 4px; text-align: center; }
+    .login-container input { width: 80%; padding: 8px; margin: 10px 0; font-size: 16px; }
+    .login-container button { padding: 8px 16px; font-size: 16px; background: #FF7F00; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>后台登录</h2>
+    <input type="text" id="username" placeholder="用户名" required />
+    <input type="password" id="password" placeholder="密码" required />
+    <button onclick="login()">登录</button>
+  </div>
+  
+  <script>
+    function login(){
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      
+      // 将账号密码发送到后端登录接口
+      fetch("https://yourserver.com/api/login", {  // 请替换为实际后端地址
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.code === 200){
+          // 登录成功，将 token 保存到 sessionStorage（或 cookie，根据需求）
+          sessionStorage.setItem("adminToken", data.token);
+          sessionStorage.setItem("adminUsername", data.username);
+          // 跳转到管理后台页面
+          window.location.href = "admin.html";
+        } else {
+          alert("登录失败：" + data.msg);
+        }
+      })
+      .catch(err => {
+        console.error("登录请求失败：", err);
+        alert("登录请求失败！");
+      });
+    }
+  </script>
+</body>
+</html>
